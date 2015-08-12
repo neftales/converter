@@ -1,8 +1,8 @@
-package conversion.conversion.txt
+package conversion.txt
 
 import conversion.Converter
 
-case object TxtToHtml extends Converter(1000) {
+case object TextPlainToHtml extends Converter(1) {
   def apply(bytes: Seq[Byte]): Seq[Byte] = {
     ???
   }

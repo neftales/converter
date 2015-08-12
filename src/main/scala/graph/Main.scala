@@ -1,5 +1,5 @@
 package graph
 
 object Main extends App {
-    println(Graph.graph)
+  println(Graph.graph)
 }
