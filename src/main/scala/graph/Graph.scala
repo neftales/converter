@@ -1,12 +1,12 @@
 package graph
 
 import conversion.Converter
-import conversion.txt.{TextPlainToPdf, TextPlainToHtml}
+import conversion.txt.{TextPlainToHtml, TextPlainToPdf}
 
 object Graph {
   val graph: Map[String, List[Converter]] = Map("Txt" -> List(TextPlainToHtml, TextPlainToPdf))
 
-  def findConvertionForMinimalPath(in: String, out: String): List[Converter] = {
+  def findConvertionForMinimalPath(in: String, out: String): Option[List[Converter]] = {
     ???
   }
 
