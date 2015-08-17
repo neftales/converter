@@ -44,6 +44,8 @@ abstract class UndirectedGraph extends Graph {
       if (n == a) Some(b)
       else if (n == b) Some(a)
       else None
+
+    override def toString: String = s"$one to $other"
   }
 
   class NodeImpl(label: String) extends INode {
