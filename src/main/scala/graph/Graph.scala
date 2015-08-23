@@ -30,6 +30,8 @@ trait Weight {
 
 trait Convert {
   var behavior = (seq: Seq[Byte]) => seq
+  def getBehavior = behavior
+
   def setBehavior(fun: (Seq[Byte]) => Seq[Byte]): Unit = {
     this.behavior = fun
   }
