@@ -40,7 +40,7 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
   protected def relaxNeighbors(u: Node, Q: Set[Node], S: Set[Node],
                                D: Map[Node, Int], P: Map[Node, Node]) = {
     for (edge <- graph.edges filter (edge => edge.a == u)) {
-      var v = edge.b
+      val v = edge.b
       if (!S.contains(v)) {
         if (!D.contains(v) || D(v) > D(u) + edge.getWeight) {
           D(v) = D(u) + edge.getWeight
