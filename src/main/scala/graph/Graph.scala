@@ -14,6 +14,9 @@ abstract class Graph {
     def b: Node
   }
 
+  def getEdge(a: Node, b: Node): Option[Edge] = {
+    edges.find(edge => edge.a == a && edge.b == b)
+  }
   def nodes: List[Node]
 
   def edges: List[Edge]
