@@ -6,7 +6,7 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
   type Node = G#Node
   type Edge = G#Edge
 
-  def initDistance(nodes: List[Node]) = {
+  private def initDistance(nodes: List[Node]) = {
     nodes.map (t => t -> Int.MaxValue)(collection.breakOut): Map[Node, Int]
   }
 
