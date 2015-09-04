@@ -9,9 +9,10 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
 
   def initDistance(nodes: List[Node]) = {
     val distance = new HashMap[Node, Int]
-    nodes foreach  (x => distance (x) = Int.MaxValue)
+    nodes foreach  (x => distance(x) = Int.MaxValue)
     distance
   }
+
   def compute(start: Node): (Map[Node, Int], Map[Node, Node]) = {
     val queue: Set[Node] = new HashSet
     val settled: Set[Node] = new HashSet

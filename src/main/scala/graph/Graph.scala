@@ -10,16 +10,20 @@ abstract class Graph {
 
   abstract class IEdge {
     def a: Node
+
     def b: Node
   }
 
   def nodes: List[Node]
+
   def edges: List[Edge]
+
   def addNode(label: String): Node
 }
 
 trait Weight {
   var weight = 1
+
   def getWeight = weight
 
   def setWeight(weight: Int): Unit = {
@@ -29,6 +33,7 @@ trait Weight {
 
 trait Convert {
   var behavior = (seq: Seq[Byte]) => seq
+
   def getBehavior = behavior
 
   def setBehavior(fun: (Seq[Byte]) => Seq[Byte]): Unit = {
@@ -37,8 +42,10 @@ trait Convert {
 }
 
 abstract class DirectedGraph extends Graph {
+
   class EdgeImpl(one: Node, other: Node) extends IEdge {
     def a = one
+
     def b = other
 
     override def toString: String = s"$one -> $other"
@@ -56,6 +63,7 @@ abstract class DirectedGraph extends Graph {
   }
 
   protected def newNode(label: String): Node
+
   protected def newEdge(one: Node, other: Node): Edge
 
   var nodes: List[Node] = Nil
@@ -67,7 +75,6 @@ abstract class DirectedGraph extends Graph {
     node
   }
 }
-
 
 
 class ConvertGraph extends DirectedGraph with Weight with Convert {
