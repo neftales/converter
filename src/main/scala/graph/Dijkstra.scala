@@ -1,6 +1,5 @@
-import graph.{ConvertGraph, Graph}
+package graph
 
-import scala.collection.mutable
 import scala.collection.mutable._
 
 class Dijkstra[G <: ConvertGraph](graph: G) {

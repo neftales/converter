@@ -1,4 +1,4 @@
-import graph.ConvertGraph
+import graph.{Dijkstra, ConvertGraph}
 import org.scalatest._
 
 class GraphSpec extends FlatSpec with Matchers {
