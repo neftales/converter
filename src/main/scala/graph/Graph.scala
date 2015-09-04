@@ -79,7 +79,6 @@ abstract class DirectedGraph extends Graph {
   }
 }
 
-
 class ConvertGraph extends DirectedGraph with Weight with Convert {
   override type Node = NodeImpl
   override type Edge = EdgeImpl with Weight with Convert

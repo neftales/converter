@@ -1,7 +1,7 @@
-import graph.{Dijkstra, ConvertGraph}
+import graph.{ConvertGraph, Dijkstra}
 import org.scalatest._
 
-class GraphSpec extends FlatSpec with Matchers {
+class DijkstraSpec extends FlatSpec with Matchers {
 
   val graph = new ConvertGraph
   val txt = graph.addNode("TXT")
