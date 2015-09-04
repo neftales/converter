@@ -11,7 +11,6 @@ abstract class Graph {
   abstract class IEdge {
     def a: Node
     def b: Node
-    def opposite(n: Node): Option[Node]
   }
 
   def nodes: List[Node]
@@ -37,24 +36,19 @@ trait Convert {
   }
 }
 
-abstract class UndirectedGraph extends Graph {
+abstract class DirectedGraph extends Graph {
   class EdgeImpl(one: Node, other: Node) extends IEdge {
     def a = one
     def b = other
 
-    def opposite(n: Node): Option[Node] =
-      if (n == a) Some(b)
-      else if (n == b) Some(a)
-      else None
-
-    override def toString: String = s"$one to $other"
+    override def toString: String = s"$one -> $other"
   }
 
   class NodeImpl(label: String) extends INode {
     this: Node =>
     def connectWith(node: Node): Edge = {
       val edge = newEdge(this, node)
-      edges = edge :: edges;
+      edges = edge :: edges
       edge
     }
 
@@ -74,7 +68,9 @@ abstract class UndirectedGraph extends Graph {
   }
 }
 
-class ConvertGraph extends UndirectedGraph with Weight with Convert {
+
+
+class ConvertGraph extends DirectedGraph with Weight with Convert {
   override type Node = NodeImpl
   override type Edge = EdgeImpl with Weight with Convert
 
