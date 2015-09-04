@@ -7,9 +7,7 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
   type Edge = G#Edge
 
   def initDistance(nodes: List[Node]) = {
-    val distance = new HashMap[Node, Int]
-    nodes foreach  (x => distance(x) = Int.MaxValue)
-    distance
+    nodes.map (t => t -> Int.MaxValue)(collection.breakOut): Map[Node, Int]
   }
 
   def compute(start: Node): (Map[Node, Int], Map[Node, Node]) = {
