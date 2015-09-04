@@ -1,16 +1,22 @@
 import graph.{ConvertGraph, Graph}
 
+import scala.collection.mutable
 import scala.collection.mutable._
 
 class Dijkstra[G <: ConvertGraph](graph: G) {
   type Node = G#Node
   type Edge = G#Edge
 
-  def compute(start: Node, target: Node): (Map[Node, Int], Map[Node, Node]) = {
-    var queue: Set[Node] = new HashSet()
-    var settled: Set[Node] = new HashSet()
-    var distance: Map[Node, Int] = new HashMap()
-    var path: Map[Node, Node] = new HashMap()
+  def initDistance(nodes: List[Node]) = {
+    val distance = new HashMap[Node, Int]
+    nodes foreach  (x => distance (x) = Int.MaxValue)
+    distance
+  }
+  def compute(start: Node): (Map[Node, Int], Map[Node, Node]) = {
+    val queue: Set[Node] = new HashSet
+    val settled: Set[Node] = new HashSet
+    val distance: Map[Node, Int] = initDistance(graph.nodes)
+    val path: Map[Node, Node] = new HashMap
 
     queue += start
     distance(start) = 0
