@@ -6,6 +6,8 @@ abstract class Graph {
 
   abstract class INode {
     def connectWith(node: Node): Edge
+
+    def connectWith(label: String): Edge
   }
 
   abstract class IEdge {
@@ -14,9 +16,33 @@ abstract class Graph {
     def b: Node
   }
 
-  def getEdge(a: Node, b: Node): Option[Edge] = {
+
+  def getEdge(a: Node, b: Node): Edge = {
     edges.find(edge => edge.a == a && edge.b == b)
+      .getOrElse(throw new Exception(s"Impossível recuperar a aresta $a -> $b"))
   }
+
+  def getEdge(a: String, b: String): Edge = {
+    val nodeA = getNode(a)
+    val nodeB = getNode(b)
+
+    getEdge(nodeA, nodeB)
+  }
+
+  def getNode(label: String): Node = {
+    nodes.find(node => node.toString.equals(label))
+      .getOrElse(throw new Exception(s"O grafo $this não contém o nó $label"))
+  }
+
+  def connectWith(label: String, nodes: List[String]): List[Edge] = {
+    val node = getNode(label)
+    nodes map (x => node.connectWith(x))
+  }
+
+  def connectWith(node: Node, nodes: List[Node]): List[Edge] = {
+    nodes map (x => node.connectWith(x))
+  }
+
   def nodes: List[Node]
 
   def edges: List[Edge]
@@ -62,8 +88,14 @@ abstract class DirectedGraph extends Graph {
       edge
     }
 
+    override def connectWith(label: String): Edge = {
+      val node = getNode(label)
+      connectWith(node)
+    }
+
     override def toString: String = label
   }
+
 
   protected def newNode(label: String): Node
 
@@ -80,6 +112,10 @@ abstract class DirectedGraph extends Graph {
 }
 
 class ConvertGraph extends DirectedGraph with Weight with Convert {
+  def apply(nodes: List[String]) = {
+    nodes map (node => addNode(node))
+  }
+
   override type Node = NodeImpl
   override type Edge = EdgeImpl with Weight with Convert
 
