@@ -1,3 +1,4 @@
+import conversion.textplain.{TextPlainToHtml, TextPlainToPdf}
 import graph.{ConvertGraph, Dijkstra}
 import org.scalatest._
 
@@ -7,7 +8,7 @@ class DijkstraSpec extends FlatSpec with Matchers {
   // Starting graph with some nodes
   graph(List("TXT", "PDF", "HTML", "PNG", "FAX", "GIF"))
 
-  graph.connectWithWeight("TXT", List(("PDF", 2), ("HTML", 6), ("PNG", 7)))
+  graph.connectWithWeightWithBehavior("TXT", List(("PDF", 2, TextPlainToPdf), ("HTML", 6, TextPlainToHtml), ("PNG", 7, TextPlainToPdf)))
   graph.connectWithWeight ("PDF", List(("FAX", 6), ("PNG", 3)))
   graph.connectWithWeight("HTML", List(("FAX", 1)))
   graph.connectWithWeight("PNG", List(("FAX", 5)))
