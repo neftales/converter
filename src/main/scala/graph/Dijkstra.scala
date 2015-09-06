@@ -10,6 +10,15 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
     nodes.map (t => t -> Int.MaxValue)(collection.breakOut): Map[Node, Int]
   }
 
+  def compute(start: String): (Map[String, Int], Map[String, Node]) = {
+    val node = graph.getNode(start)
+    val (dis, path) = compute(node)
+
+    val disString = dis map(t => t._1.toString -> t._2)
+    val pathString = path map(t => t._1.toString -> t._2)
+    (disString, pathString)
+  }
+
   def compute(start: Node): (Map[Node, Int], Map[Node, Node]) = {
     val queue: Set[Node] = new HashSet
     val settled: Set[Node] = new HashSet
