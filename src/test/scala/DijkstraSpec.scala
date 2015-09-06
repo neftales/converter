@@ -4,34 +4,35 @@ import org.scalatest._
 class DijkstraSpec extends FlatSpec with Matchers {
 
   val graph = new ConvertGraph
-  val txt = graph.addNode("TXT")
-  val pdf = graph.addNode("PDF")
-  val html = graph.addNode("HTML")
-  val png = graph.addNode("PNG")
-  val fax = graph.addNode("FAX")
-  val gif = graph.addNode("GIF")
+  // Starting graph with some nodes
+  graph(List("TXT", "PDF", "HTML", "PNG", "FAX", "GIF"))
 
-  txt.connectWith(pdf).setWeight(2)
-  txt.connectWith(html).setWeight(6)
-  txt.connectWith(png).setWeight(7)
-  pdf.connectWith(fax).setWeight(6)
-  pdf.connectWith(png).setWeight(3)
-  html.connectWith(fax).setWeight(1)
-  png.connectWith(fax).setWeight(5)
+  graph.connectWith("TXT", List("PDF", "HTML", "PNG"))
+  graph.connectWith("PDF", List("FAX", "PNG"))
+  graph.connectWith("HTML", List("FAX"))
+  graph.connectWith("PNG", List("FAX"))
+
+  val txtToPDF = graph.getEdge("TXT", "PDF").setWeight(2)
+  val txtToHTML = graph.getEdge("TXT", "HTML").setWeight(6)
+  val txtToPNG = graph.getEdge("TXT", "PNG").setWeight(7)
+  val pdfToFAX = graph.getEdge("PDF", "FAX").setWeight(6)
+  val pdfToPNG = graph.getEdge("PDF", "PNG").setWeight(3)
+  val htmlToFAX = graph.getEdge("HTML", "FAX").setWeight(1)
+  val pngToFAX = graph.getEdge("PNG", "FAX").setWeight(5)
 
   val dijkstra = new Dijkstra[graph.type](graph)
-  val (dis, path) = dijkstra.compute(txt)
+  val (dis, path) = dijkstra.compute("TXT")
 
   "Dijkstra" should "find shortest path" in {
-    dis(txt) should be(0)
-    dis(html) should be(6)
-    dis(fax) should be(7)
-    dis(pdf) should be(2)
-    dis(png) should be(5)
+    dis("TXT") should be(0)
+    dis("HTML") should be(6)
+    dis("FAX") should be(7)
+    dis("PDF") should be(2)
+    dis("PNG") should be(5)
   }
 
   "Dijkstra" should "not find shortest path" in {
-    dis(gif) should be(Int.MaxValue)
+    dis("GIF") should be(Int.MaxValue)
   }
 
 }
