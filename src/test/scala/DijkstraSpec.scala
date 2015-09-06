@@ -7,18 +7,10 @@ class DijkstraSpec extends FlatSpec with Matchers {
   // Starting graph with some nodes
   graph(List("TXT", "PDF", "HTML", "PNG", "FAX", "GIF"))
 
-  graph.connectWith("TXT", List("PDF", "HTML", "PNG"))
-  graph.connectWith("PDF", List("FAX", "PNG"))
-  graph.connectWith("HTML", List("FAX"))
-  graph.connectWith("PNG", List("FAX"))
-
-  val txtToPDF = graph.getEdge("TXT", "PDF").setWeight(2)
-  val txtToHTML = graph.getEdge("TXT", "HTML").setWeight(6)
-  val txtToPNG = graph.getEdge("TXT", "PNG").setWeight(7)
-  val pdfToFAX = graph.getEdge("PDF", "FAX").setWeight(6)
-  val pdfToPNG = graph.getEdge("PDF", "PNG").setWeight(3)
-  val htmlToFAX = graph.getEdge("HTML", "FAX").setWeight(1)
-  val pngToFAX = graph.getEdge("PNG", "FAX").setWeight(5)
+  graph.connectWithWeight("TXT", List(("PDF", 2), ("HTML", 6), ("PNG", 7)))
+  graph.connectWithWeight ("PDF", List(("FAX", 6), ("PNG", 3)))
+  graph.connectWithWeight("HTML", List(("FAX", 1)))
+  graph.connectWithWeight("PNG", List(("FAX", 5)))
 
   val dijkstra = new Dijkstra[graph.type](graph)
   val (dis, path) = dijkstra.compute("TXT")
