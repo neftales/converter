@@ -123,4 +123,20 @@ class ConvertGraph extends DirectedGraph with Weight with Convert {
     new EdgeImpl(one, other) with Weight with Convert
 
   override protected def newNode(label: String): Node = new NodeImpl(label)
+
+  def connectWithWeight(label: String, nodes: List[(String, Int)]): List[Edge] = {
+    val node = getNode(label)
+    val nodesList = nodes map { node =>
+      getNode(node._1) -> node._2
+    }
+    connectWithWeight(node, nodesList)
+  }
+
+  def connectWithWeight(node: Node, nodes: List[(Node, Int)]): List[Edge] = {
+    nodes.map {x =>
+      val edge = node.connectWith(x._1)
+      edge.setWeight(x._2)
+      edge
+    }
+  }
 }
