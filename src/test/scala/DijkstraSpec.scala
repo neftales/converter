@@ -9,7 +9,7 @@ class DijkstraSpec extends FlatSpec with Matchers {
   graph(List("TXT", "PDF", "HTML", "PNG", "FAX", "GIF"))
 
   graph.connectWithWeightWithBehavior("TXT", List(("PDF", 2, TextPlainToPdf), ("HTML", 6, TextPlainToHtml), ("PNG", 7, TextPlainToPdf)))
-  graph.connectWithWeight ("PDF", List(("FAX", 6), ("PNG", 3)))
+  graph.connectWithWeight("PDF", List(("FAX", 6), ("PNG", 3)))
   graph.connectWithWeight("HTML", List(("FAX", 1)))
   graph.connectWithWeight("PNG", List(("FAX", 5)))
 
