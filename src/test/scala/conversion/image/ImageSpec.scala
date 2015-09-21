@@ -10,6 +10,7 @@ class ImageSpec extends FlatSpec with Matchers {
   val fileJPEG = new File(getClass.getClassLoader.getResource("docker.jpg").getPath)
   val filePNG = new File(getClass.getClassLoader.getResource("docker.png").getPath)
   val fileGIF = new File(getClass.getClassLoader.getResource("docker.gif").getPath)
+  val fileTIFF = new File(getClass.getClassLoader.getResource("docker.tiff").getPath)
 
   def readFileToByte(file: File): Array[Byte] = {
     val fileInputStream = new FileInputStream(file)
@@ -33,6 +34,11 @@ class ImageSpec extends FlatSpec with Matchers {
     Image.toGIF(bytes).nonEmpty shouldBe true
   }
 
+  it should "be converted in TIFF" in {
+    val bytes = readFileToByte(fileBMP)
+    Image.toTIFF(bytes).nonEmpty shouldBe true
+  }
+
   "GIF" should "be converted in JPG" in {
     val bytes = readFileToByte(fileGIF)
     Image.toJPEG(bytes).nonEmpty shouldBe true
@@ -48,9 +54,14 @@ class ImageSpec extends FlatSpec with Matchers {
     Image.toBMP(bytes).nonEmpty shouldBe true
   }
 
+  it should "be converted in TIFF" in {
+    val bytes = readFileToByte(fileGIF)
+    Image.toTIFF(bytes).nonEmpty shouldBe true
+  }
+
   "JPEG" should "be converted in GIF" in {
     val bytes = readFileToByte(fileJPEG)
-    Image.toJPEG(bytes).nonEmpty shouldBe true
+    Image.toGIF(bytes).nonEmpty shouldBe true
   }
 
   it should "be converted in PNG" in {
@@ -63,9 +74,14 @@ class ImageSpec extends FlatSpec with Matchers {
     Image.toBMP(bytes).nonEmpty shouldBe true
   }
 
+  it should "be converted in TIFF" in {
+    val bytes = readFileToByte(fileJPEG)
+    Image.toTIFF(bytes).nonEmpty shouldBe true
+  }
+
   "PNG" should "be converted in GIF" in {
     val bytes = readFileToByte(filePNG)
-    Image.toJPEG(bytes).nonEmpty shouldBe true
+    Image.toGIF(bytes).nonEmpty shouldBe true
   }
 
   it should "be converted in JPEG" in {
@@ -77,4 +93,30 @@ class ImageSpec extends FlatSpec with Matchers {
     val bytes = readFileToByte(filePNG)
     Image.toBMP(bytes).nonEmpty shouldBe true
   }
+
+  it should "be converted in TIFF" in {
+    val bytes = readFileToByte(filePNG)
+    Image.toTIFF(bytes).nonEmpty shouldBe true
+  }
+
+  "TIFF" should "be converted in JPEG" in {
+    val bytes = readFileToByte(fileTIFF)
+    val image = Image.toJPEG(bytes).nonEmpty shouldBe true
+  }
+
+  it should "be converted in PNG" in {
+    val bytes = readFileToByte(fileTIFF)
+    Image.toPNG(bytes).nonEmpty shouldBe true
+  }
+
+  it should "be converted in BMP" in {
+    val bytes = readFileToByte(fileTIFF)
+    Image.toBMP(bytes).nonEmpty shouldBe true
+  }
+
+  it should "be converted in GIF" in {
+    val bytes = readFileToByte(fileTIFF)
+    Image.toGIF(bytes).nonEmpty shouldBe true
+  }
+
 }
