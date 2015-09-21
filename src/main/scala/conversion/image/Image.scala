@@ -26,4 +26,10 @@ object Image {
     }
   }
 
+  object toTIFF extends Function[Seq[Byte], Seq[Byte]] {
+    override def apply(file: Seq[Byte]): Seq[Byte] = {
+      writeTo(file, "tiff")
+    }
+  }
+
 }
