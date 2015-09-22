@@ -7,15 +7,15 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
   type Edge = G#Edge
 
   private def initDistance(nodes: List[Node]) = {
-    nodes.map (t => t -> Int.MaxValue)(collection.breakOut): Map[Node, Int]
+    nodes.map(t => t -> Int.MaxValue)(collection.breakOut): Map[Node, Int]
   }
 
   def compute(start: String): (Map[String, Int], Map[String, Node]) = {
     val node = graph.getNode(start)
     val (dis, path) = compute(node)
 
-    val disString = dis map(t => t._1.toString -> t._2)
-    val pathString = path map(t => t._1.toString -> t._2)
+    val disString = dis map (t => t._1.toString -> t._2)
+    val pathString = path map (t => t._1.toString -> t._2)
     (disString, pathString)
   }
 
