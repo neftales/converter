@@ -15,6 +15,6 @@ class TextPlainToHtmlSpec extends FlatSpec with Matchers {
 
   "TextPlain" should "be converted in HTML" in new init {
     val html = new String(TextPlainToHtml(byteArray.toSeq).toArray)
-    html.contains(texto) should be (true)
+    html.contains(texto) shouldBe true
   }
 }

@@ -17,15 +17,15 @@ class DijkstraSpec extends FlatSpec with Matchers {
   val (dis, path) = dijkstra.compute("TXT")
 
   "Dijkstra" should "find shortest path" in {
-    dis("TXT") should be(0)
-    dis("HTML") should be(6)
-    dis("FAX") should be(7)
-    dis("PDF") should be(2)
-    dis("PNG") should be(5)
+    dis("TXT") shouldBe 0
+    dis("HTML") shouldBe 6
+    dis("FAX") shouldBe 7
+    dis("PDF") shouldBe 2
+    dis("PNG") shouldBe 5
   }
 
   "Dijkstra" should "not find shortest path" in {
-    dis("GIF") should be(Int.MaxValue)
+    dis("GIF") shouldBe Int.MaxValue
   }
 
 }

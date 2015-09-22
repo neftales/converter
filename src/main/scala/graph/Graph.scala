@@ -1,5 +1,6 @@
 package graph
 
+
 abstract class Graph {
   type Edge <: IEdge
   type Node <: INode
@@ -156,4 +157,5 @@ class ConvertGraph extends DirectedGraph with Weight with Convert {
       edge
     }
   }
+
 }

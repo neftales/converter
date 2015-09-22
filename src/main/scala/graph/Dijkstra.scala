@@ -1,14 +1,11 @@
 package graph
 
+import scala.collection.mutable
 import scala.collection.mutable._
 
 class Dijkstra[G <: ConvertGraph](graph: G) {
   type Node = G#Node
   type Edge = G#Edge
-
-  private def initDistance(nodes: List[Node]) = {
-    nodes.map(t => t -> Int.MaxValue)(collection.breakOut): Map[Node, Int]
-  }
 
   def compute(start: String): (Map[String, Int], Map[String, Node]) = {
     val node = graph.getNode(start)
@@ -35,6 +32,10 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
     }
 
     (distance, path)
+  }
+
+  private def initDistance(nodes: List[Node]) = {
+    nodes.map(t => t -> Int.MaxValue)(collection.breakOut): Map[Node, Int]
   }
 
   protected def extractMinimum[T](Q: Set[T], D: Map[T, Int]): T = {
