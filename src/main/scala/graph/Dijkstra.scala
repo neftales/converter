@@ -57,4 +57,29 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
       }
     }
   }
+
+  def mountListOfEdge(start: Node, end: Node): List[Edge] = {
+    val (dis, path) = compute(start)
+
+    val stack = new mutable.Stack[Node]()
+    stack.push(end)
+
+    while (stack.top != start) {
+      val node = path(stack.top)
+      stack.push(node)
+    }
+
+    mountListOfEdge(stack)
+  }
+
+  def mountListOfEdge(stack: mutable.Stack[Node]): List[Edge] = {
+    val list = new mutable.MutableList[Edge]
+
+    while (stack.size > 1) {
+      val node = stack.pop()
+      val edge = graph.getEdge(node.toString, stack.top.toString)
+      list += edge
+    }
+    list.toList
+  }
 }
