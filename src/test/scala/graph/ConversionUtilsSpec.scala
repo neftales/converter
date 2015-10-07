@@ -19,17 +19,13 @@ class ConversionUtilsSpec extends FlatSpec with Matchers {
   graph connectWithWeightWithBehavior("GIF", List(("PNG", 1, Image.toPNG)))
 
   "PNG" should "be conveted in GIF file" in {
-    val conversion = new ConversionUtils().getConversion("PNG", "GIF", graph)
+    val conversion = ConversionUtils.getConversion("PNG", "GIF")
     val fileIn = new FileInputStream(filePNG)
     val bytes = new Array[Byte](fileIn.available)
 
     fileIn.read(bytes)
-
     val file = conversion(bytes.toSeq)
 
-    val fileOut = new FileOutputStream("I:\\Teste\\A.gif")
-    fileOut.write(file.toArray)
-    fileOut.flush()
-    fileOut.close()
+    file.nonEmpty shouldBe true
   }
 }
