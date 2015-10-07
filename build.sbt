@@ -20,4 +20,4 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 )
 
-
+libraryDependencies ~= { _.map(_.exclude("org.slf4j", "slf4j-simple")) }
