@@ -1,8 +1,8 @@
 package graph
 
-class ConversionUtils {
+object ConversionUtils {
 
-  def getConversion(start: String, end: String, graph: ConvertGraph): Seq[Byte] => Seq[Byte] = {
+  def getConversion(start: String, end: String)(implicit graph: ConvertGraph): Seq[Byte] => Seq[Byte] = {
     val dijkstra = new Dijkstra[graph.type](graph)
     val list = dijkstra.mountListOfEdge(graph.getNode(start), graph.getNode(end))
 
