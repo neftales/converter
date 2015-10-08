@@ -1,10 +1,11 @@
 import java.net.InetSocketAddress
 
 import com.twitter.finagle.builder.ServerBuilder
-import com.twitter.finagle.httpx.{Http, Request}
+import com.twitter.finagle.httpx.Http
+import com.typesafe.scalalogging.slf4j.LazyLogging
 import graph.ConversionHandler
 
-object Applications extends App {
+object Applications extends App with LazyLogging {
   //setup service chain
   val serviceChain = new ConversionHandler
 
@@ -16,7 +17,7 @@ object Applications extends App {
     .name("HTTP endpoint")
     .build(serviceChain)
 
-  println("microservice started")
+  logger.info("Serviço iniciado.")
 
 }
 
