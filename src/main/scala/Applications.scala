@@ -7,7 +7,7 @@ import graph.ConversionHandler
 
 object Applications extends App with LazyLogging {
   //setup service chain
-  val serviceChain = new ConversionHandler
+  val service = new ConversionHandler
 
   //HTTP endpoint
   val socketAddress = new InetSocketAddress(8080)
@@ -15,7 +15,7 @@ object Applications extends App with LazyLogging {
     .codec(Http())
     .bindTo(socketAddress)
     .name("HTTP endpoint")
-    .build(serviceChain)
+    .build(service)
 
   logger.info("Serviço iniciado.")
 
