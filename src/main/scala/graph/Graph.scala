@@ -18,25 +18,25 @@ abstract class Graph {
   }
 
 
-  def getEdge(a: Node, b: Node): Edge = {
+  def getEdge(a: Node, b: Node): Option[Edge] = {
     edges.find(edge => edge.a == a && edge.b == b)
-      .getOrElse(throw new Exception(s"Impossível recuperar a aresta $a -> $b"))
   }
 
-  def getEdge(a: String, b: String): Edge = {
+  def getEdge(a: String, b: String): Option[Edge] = {
     val nodeA = getNode(a)
     val nodeB = getNode(b)
 
-    getEdge(nodeA, nodeB)
+
+    if (nodeA == None || nodeB == None) None
+    else getEdge(nodeA.get, nodeB.get)
   }
 
-  def getNode(label: String): Node = {
+  def getNode(label: String): Option[Node] = {
     nodes.find(node => node.toString.equals(label))
-      .getOrElse(throw new Exception(s"O grafo $this não contém o nó $label"))
   }
 
   def connectWith(label: String, nodes: List[String]): List[Edge] = {
-    val node = getNode(label)
+    val node = getNode(label).get
     nodes map (x => node.connectWith(x))
   }
 
@@ -90,7 +90,7 @@ abstract class DirectedGraph extends Graph {
     }
 
     override def connectWith(label: String): Edge = {
-      val node = getNode(label)
+      val node = getNode(label).get
       connectWith(node)
     }
 
@@ -126,9 +126,9 @@ class ConvertGraph extends DirectedGraph with Weight with Convert {
   override protected def newNode(label: String): Node = new NodeImpl(label)
 
   def connectWithWeight(label: String, nodes: List[(String, Int)]): List[Edge] = {
-    val node = getNode(label)
+    val node = getNode(label).get
     val nodesList = nodes map { node =>
-      getNode(node._1) -> node._2
+      getNode(node._1).get -> node._2
     }
     connectWithWeight(node, nodesList)
   }
@@ -142,9 +142,9 @@ class ConvertGraph extends DirectedGraph with Weight with Convert {
   }
 
   def connectWithWeightWithBehavior(label: String, nodes: List[(String, Int, Function[Seq[Byte], Seq[Byte]])]): List[Edge] = {
-    val node = getNode(label)
+    val node = getNode(label).get
     val nodesList = nodes map { node =>
-      (getNode(node._1), node._2, node._3)
+      (getNode(node._1).get, node._2, node._3)
     }
     connectWithWeightWithBehavior(node, nodesList)
   }

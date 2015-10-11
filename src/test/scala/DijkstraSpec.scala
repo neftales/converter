@@ -14,7 +14,7 @@ class DijkstraSpec extends FlatSpec with Matchers {
   graph.connectWithWeight("PNG", List(("FAX", 5)))
 
   val dijkstra = new Dijkstra[graph.type](graph)
-  val (dis, path) = dijkstra.compute("TXT")
+  val (dis, path) = dijkstra.compute("TXT").get
 
   "Dijkstra" should "find shortest path" in {
     dis("TXT") shouldBe 0

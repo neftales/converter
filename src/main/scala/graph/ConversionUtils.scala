@@ -2,17 +2,30 @@ package graph
 
 object ConversionUtils {
 
-  def getConversion(start: String, end: String)(implicit graph: ConvertGraph): Seq[Byte] => Seq[Byte] = {
+  def getConversion(start: String, end: String)(implicit graph: ConvertGraph): Option[Seq[Byte] => Seq[Byte]] = {
     val dijkstra = new Dijkstra[graph.type](graph)
-    val list = dijkstra.mountListOfEdge(graph.getNode(start), graph.getNode(end))
+    val nodeA = graph.getNode(start)
+    val nodeB = graph.getNode(end)
 
-    val listBehavior = list map { edge =>
-      edge.getBehavior
+    (nodeA, nodeB) match {
+      case (Some(a), Some(b)) =>
+        dijkstra.mountListOfEdge(a, b) match {
+          case Some(list) =>
+            val listBehavior = list map { edge =>
+              edge.getBehavior
+            }
+
+            val compose = listBehavior.reduceLeft { (f, g) =>
+              f andThen g
+            }
+
+            Some(compose)
+
+          case _ => None
+        }
+      case _ => None
     }
 
-    listBehavior.reduceLeft { (f, g) =>
-      f andThen g
-    }
   }
 
 }

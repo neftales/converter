@@ -7,13 +7,17 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
   type Node = G#Node
   type Edge = G#Edge
 
-  def compute(start: String): (Map[String, Int], Map[String, Node]) = {
-    val node = graph.getNode(start)
-    val (dis, path) = compute(node)
+  def compute(start: String): Option[(Map[String, Int], Map[String, Node])] = {
+    graph.getNode(start) match {
+      case Some(x) =>
+        val (dis, path) = compute(x)
 
-    val disString = dis map (t => t._1.toString -> t._2)
-    val pathString = path map (t => t._1.toString -> t._2)
-    (disString, pathString)
+        val disString = dis map (t => t._1.toString -> t._2)
+        val pathString = path map (t => t._1.toString -> t._2)
+        Some(disString, pathString)
+      case _ => None
+    }
+
   }
 
   def compute(start: Node): (Map[Node, Int], Map[Node, Node]) = {
@@ -59,28 +63,34 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
     }
   }
 
-  def mountListOfEdge(start: Node, end: Node): List[Edge] = {
+  def mountListOfEdge(start: Node, end: Node): Option[List[Edge]] = {
     val (dis, path) = compute(start)
 
     val stack = new mutable.Stack[Node]()
     stack.push(end)
 
-    while (stack.top != start) {
-      val node = path(stack.top)
-      stack.push(node)
+    try {
+      while (stack.top != start) {
+        val node = path(stack.top)
+        stack.push(node)
+      }
+    } catch {
+      case e: NoSuchElementException => return None
     }
-
     mountListOfEdge(stack)
   }
 
-  def mountListOfEdge(stack: mutable.Stack[Node]): List[Edge] = {
+  def mountListOfEdge(stack: mutable.Stack[Node]): Option[List[Edge]] = {
     val list = new mutable.MutableList[Edge]
 
     while (stack.size > 1) {
       val node = stack.pop()
-      val edge = graph.getEdge(node.toString, stack.top.toString)
-      list += edge
+      graph.getEdge(node.toString, stack.top.toString) match {
+        case Some(edge) => list += edge
+        case _ => None
+      }
     }
-    list.toList
+
+    Some(list.toList)
   }
 }
