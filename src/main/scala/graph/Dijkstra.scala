@@ -74,10 +74,10 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
         val node = path(stack.top)
         stack.push(node)
       }
+      mountListOfEdge(stack)
     } catch {
-      case e: NoSuchElementException => return None
+      case e: NoSuchElementException => None
     }
-    mountListOfEdge(stack)
   }
 
   def mountListOfEdge(stack: mutable.Stack[Node]): Option[List[Edge]] = {
