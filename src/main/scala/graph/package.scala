@@ -1,9 +1,6 @@
 import conversion.image.Image
 import conversion.textplain.TextPlainToHtml
 
-/**
- * @author neftales.antunes
- */
 package object graph {
 
   // 1. Construct graph

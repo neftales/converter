@@ -13,10 +13,6 @@ libraryDependencies ++= Seq(
   // Image
   "com.github.jai-imageio" % "jai-imageio-core" % "1.3.0",
 
-  // Finagle
-  "com.twitter" %% "finagle-core" % finagleVersion,
-  "com.twitter" %% "finagle-httpx" % finagleVersion,
-
   // Log
   "ch.qos.logback" % "logback-classic" % "1.1.3",
   "net.logstash.logback" % "logstash-logback-encoder" % "4.5.1",
