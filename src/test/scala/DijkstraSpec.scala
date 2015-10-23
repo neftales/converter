@@ -1,11 +1,11 @@
-import conversion.textplain.{TextPlainToHtml, TextPlainToPdf}
-import graph.{ConvertGraph, Dijkstra}
+import com.github.neftales.conversion.textplain.{TextPlainToHtml, TextPlainToPdf}
+import com.github.neftales.graph.{ConvertGraph, Dijkstra}
 import org.scalatest._
 
 class DijkstraSpec extends FlatSpec with Matchers {
 
   val graph = new ConvertGraph
-  // Starting graph with some nodes
+  // Starting com.github.neftales.graph with some nodes
   graph(List("TXT", "PDF", "HTML", "PNG", "FAX", "GIF"))
 
   graph.connectWithWeightWithBehavior("TXT", List(("PDF", 2, TextPlainToPdf), ("HTML", 6, TextPlainToHtml), ("PNG", 7, TextPlainToPdf)))

@@ -1,4 +1,4 @@
-package graph
+package com.github.neftales.graph
 
 
 abstract class Graph {

@@ -1,4 +1,4 @@
-package conversion.textplain
+package com.github.neftales.conversion.textplain
 
 import java.io.File
 

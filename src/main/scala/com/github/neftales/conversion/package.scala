@@ -1,3 +1,5 @@
+package com.github.neftales
+
 import java.io.{FileOutputStream, FileInputStream, File}
 
 package object conversion {

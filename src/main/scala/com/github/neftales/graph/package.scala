@@ -1,11 +1,11 @@
-import conversion.image.Image
-import conversion.textplain.TextPlainToHtml
+package com.github.neftales
+
+import com.github.neftales.conversion.image.Image
+import com.github.neftales.conversion.textplain.TextPlainToHtml
 
 package object graph {
 
-  // 1. Construct graph
   implicit val converteGraph = new ConvertGraph
-  // Starting graph with some nodes
   converteGraph(List("TXT", "HTML", "PNG", "TIFF", "GIF", "BMP", "JPEG"))
 
   converteGraph.connectWithWeightWithBehavior("TXT", List(("HTML", 1, TextPlainToHtml)))

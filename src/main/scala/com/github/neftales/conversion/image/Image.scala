@@ -1,4 +1,4 @@
-package conversion.image
+package com.github.neftales.conversion.image
 
 import com.typesafe.scalalogging.slf4j.LazyLogging
 

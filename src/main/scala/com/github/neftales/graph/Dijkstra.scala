@@ -1,4 +1,4 @@
-package graph
+package com.github.neftales.graph
 
 import scala.collection.mutable
 import scala.collection.mutable._

@@ -1,9 +1,14 @@
-import com.typesafe.scalalogging.slf4j.LazyLogging
+package com.github.neftales
 
+import com.typesafe.scalalogging.slf4j.LazyLogging
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.servlet.DefaultServlet
 import org.eclipse.jetty.webapp.WebAppContext
 import org.scalatra.servlet.ScalatraListener
+
+/**
+ * @author neftales.antunes
+ */
 object Applications extends App with LazyLogging {
 
   val port = Option(System.getenv("PORT")) match {
@@ -24,4 +29,3 @@ object Applications extends App with LazyLogging {
   server.start()
   server.join()
 }
-

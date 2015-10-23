@@ -1,4 +1,4 @@
-package conversion
+package com.github.neftales.conversion
 
 import java.awt.Color
 import java.awt.image.BufferedImage

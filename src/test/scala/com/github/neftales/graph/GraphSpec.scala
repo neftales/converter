@@ -1,6 +1,7 @@
-package graph
+package com.github.neftales.graph
 
 import org.scalatest.{Matchers, FlatSpec}
+import com.github.neftales.graph.converteGraph
 
 class GraphSpec extends FlatSpec with Matchers {
 

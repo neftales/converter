@@ -1,8 +1,8 @@
-package graph
+package com.github.neftales.graph
 
 import java.io.{File, FileInputStream}
 
-import api.ConversionUtils
+import com.github.neftales.api.ConversionUtils
 import org.scalatest.{FlatSpec, Matchers}
 
 class ConversionUtilsSpec extends FlatSpec with Matchers {

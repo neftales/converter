@@ -1,6 +1,6 @@
-package api
+package com.github.neftales.api
 
-import graph.{ConvertGraph, Dijkstra}
+import com.github.neftales.graph.{ConvertGraph, Dijkstra}
 
 object ConversionUtils {
 
