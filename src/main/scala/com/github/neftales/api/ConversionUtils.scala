@@ -30,4 +30,8 @@ object ConversionUtils {
 
   }
 
+  def getNodes()(implicit graph: ConvertGraph) = {
+    graph.nodes
+  }
+
 }

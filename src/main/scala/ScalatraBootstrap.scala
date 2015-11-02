@@ -1,9 +1,12 @@
+import com.github.neftales.controllers.ConverterController
 import org.scalatra.{CorsSupport, LifeCycle}
 
 import javax.servlet.ServletContext
 class ScalatraBootstrap extends LifeCycle {
 
   override def init(context: ServletContext) {
+
+    context.mount(new ConverterController, "/converter", "converter")
     // TODO possibly toggle
     context.initParameters("org.scalatra.environment") = "production"
 
