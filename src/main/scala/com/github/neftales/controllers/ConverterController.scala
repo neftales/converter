@@ -1,20 +1,31 @@
 package com.github.neftales.controllers
 
 
-import java.net.InetAddress
-
 import com.github.neftales.api.ConversionUtils
 import com.typesafe.scalalogging.slf4j.LazyLogging
+import net.iharder.Base64
+import org.scalatra.{NotFound, Ok}
 
-/**
- * Created by Neftales on 01/11/2015.
- */
 class ConverterController extends BaseController with LazyLogging {
 
-  get("/") {
-    val host = InetAddress.getLocalHost.getHostName
-    logger.info(host)
+  get("/nodes/") {
     ConversionUtils.getNodes()
+  }
+
+  post("/?") {
+    val data: RequestConversion = parsedBody.extract[RequestConversion]
+
+    logger.info(s"Realizando conversao de ${data.start} para ${data.end}")
+    ConversionUtils.getConversion(data.start, data.end) match {
+      case Some(function) =>
+        logger.info(s"${data.start}")
+        val converted = function(data.content.toSeq)
+        Ok(ResponseConversion(s"${data.end}", Base64.encodeBytes(converted.toArray)))
+      case None =>
+        logger.info(s"Impossivel realizar a conversao de ${data.start} para ${data.end}")
+        NotFound("")
+    }
+
   }
 
 }
