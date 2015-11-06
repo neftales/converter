@@ -9,6 +9,7 @@ import org.scalatra.{NotFound, Ok}
 class ConverterController extends BaseController with LazyLogging {
 
   get("/nodes/") {
+    logger.info(s"Consultando lista de formatos disponiveis")
     ConversionUtils.getNodes()
   }
 
