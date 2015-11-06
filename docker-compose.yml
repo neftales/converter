@@ -1,0 +1,64 @@
+converter:
+    build: backend
+    volumes:
+        - ./backend/target/scala-2.11:/usr/local
+    expose:
+        - "8080"
+    links:
+        - logstash-agent:logs
+
+elasticsearch-central:
+    image: elasticsearch:latest
+    volumes:
+        - ./docker-compose/elasticsearch/data:/usr/share/elasticsearch/data
+    environment:
+        - ES_CLUSTERNAME=mydevelastic
+    command: elasticsearch -Des.config=/usr/share/elasticsearch/data/elasticsearch.yml
+    ports:
+        - "9200:9200"
+        - "9300:9300"
+
+kibana-frontend:
+    image: kibana:latest
+    ports:
+        - "5601:5601"
+    links:
+       - elasticsearch-central:elasticsearch
+
+redis-cache:
+    image: redis:latest
+    ports:
+        - "6379:6379"
+
+logstash-agent:
+    image: logstash:latest
+    ports: 
+        - "25827:25827"
+        - "25827:25827/udp"
+    volumes:
+        - ./docker-compose/logstash/conf:/conf
+    command: logstash -f /conf/agent.conf
+    links:
+       - redis-cache:redis
+
+logstash-central:
+    image: logstash:latest
+    ports:
+        - "25826:25826"
+        - "25826:25826/udp"
+    volumes:
+        - ./docker-compose/logstash/conf:/conf
+    command: logstash -f /conf/central.conf
+    links:
+       - redis-cache:redis
+       - elasticsearch-central:db
+
+lb:
+    image: tutum/haproxy
+    links:
+        - converter
+    ports:
+        - "80:80"
+    environment:
+        - BACKEND_PORT=8080
+        - BALANCE=roundrobin
