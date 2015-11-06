@@ -10,10 +10,11 @@ converter:
 elasticsearch-central:
     image: elasticsearch:latest
     volumes:
+        - ./docker-compose/elasticsearch/conf:/usr/share/elasticsearch/conf
         - ./docker-compose/elasticsearch/data:/usr/share/elasticsearch/data
     environment:
         - ES_CLUSTERNAME=mydevelastic
-    command: elasticsearch -Des.config=/usr/share/elasticsearch/data/elasticsearch.yml
+    command: elasticsearch -Des.config=/usr/share/elasticsearch/conf/elasticsearch.yml
     ports:
         - "9200:9200"
         - "9300:9300"
