@@ -1,0 +1,7 @@
+cluster.name: ${ES_CLUSTERNAME}
+node.name: ${HOSTNAME}
+node.machine: machine1
+node.rack: rack1
+cluster.routing.allocation.awareness.attributes: machine,rack
+
+discovery.zen.ping.multicast.enabled: true
