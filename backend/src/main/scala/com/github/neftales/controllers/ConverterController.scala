@@ -8,9 +8,22 @@ import org.scalatra.{NotFound, Ok}
 
 class ConverterController extends BaseController with LazyLogging {
 
-  get("/nodes/") {
+  get("/nodes") {
     logger.info(s"Consultando lista de formatos disponiveis")
     ConversionUtils.getNodes()
+  }
+
+  get("/from/:node") {
+    val node = params("node")
+    logger.info(s"Consultando conversões possíveis a partir de $node")
+
+    ConversionUtils.getNodes(node) match {
+      case Some(x) => x map { tuple =>
+        NodeResponse(tuple._1.toString, tuple._2)
+      }
+
+      case _ => NotFound("")
+    }
   }
 
   post("/?") {

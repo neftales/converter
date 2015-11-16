@@ -36,4 +36,16 @@ object ConversionUtils {
     }
   }
 
+  def getNodes(node: String)(implicit graph: ConvertGraph): Option[List[(graph.Node, Int)]] = {
+    val dijkstra = new Dijkstra[graph.type](graph)
+
+    val list: Option[List[(dijkstra.Node, Int)]] = graph.getNode(node) match {
+      case Some(node) =>
+        val (dist, path) = dijkstra.compute(node)
+        Some(dist.toList.filter(p => p._2 != Int.MaxValue && p._2 > 0))
+      case _ => None
+    }
+    list
+  }
+
 }
