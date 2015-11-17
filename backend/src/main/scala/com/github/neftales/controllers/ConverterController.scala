@@ -14,7 +14,7 @@ class ConverterController extends BaseController with LazyLogging {
   }
 
   get("/from/:node") {
-    val node = params("node")
+    val node = params("node").toUpperCase
     logger.info(s"Consultando conversões possíveis a partir de $node")
 
     ConversionUtils.getNodes(node) match {
