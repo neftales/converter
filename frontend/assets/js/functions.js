@@ -17,7 +17,7 @@ $(document).ready(function() {
 			}	
 		},
 		error: function( xhr, status, errorThrown ) {
-			console.log( errorThrown );
+		   alert("Falha ao obter os formatos disponíveis.");
 		}
 	});
 });
@@ -73,8 +73,8 @@ function obter_arquivos_de_destino(formato) {
 			}	
 		},
 		error: function( xhr, status, errorThrown ) {
-			console.log( errorThrown );
-		}
+		    alert("Falha ao obter os formatos de destino.");
+        }
 	});
 }
 
@@ -96,8 +96,8 @@ function obter_arquivo_transformado(content, nome_arquivo) {
 			$("#lista_arquivos_convertidos").append('<a download="' + nome + "." + transacao.end.toLowerCase() + '" href="data:image;base64,' + response.content + '" class="list-group-item">' + nome + "." + transacao.end.toLowerCase() + '</a>');
 		},
 		error: function( xhr, status, errorThrown ) {
-			console.log( errorThrown );
-		}
+		    alert("Falha ao realizar a conversão de " + transacao.start + " para " + transacao.end); 
+        }
 	});
 }
 
