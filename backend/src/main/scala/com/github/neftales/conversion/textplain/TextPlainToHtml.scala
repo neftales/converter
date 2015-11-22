@@ -12,7 +12,7 @@ case object TextPlainToHtml extends Function[Seq[Byte], Seq[Byte]] with LazyLogg
     val path = getClass.getClassLoader.getResource("templateHTML.html").getPath
     val template = new File(path)
     val t = Handlebars(template)
-    val map = Map("body" -> readSeq(file))
+    val map = Map("body" -> readSeq(file).replace("\n", "<br>"))
     val textoSaida = t(map)
 
     logger.info(s" -> HTML")
