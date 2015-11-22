@@ -33,7 +33,7 @@ redis-cache:
 
 logstash-agent:
     image: logstash:latest
-    ports: 
+    ports:
         - "25827:25827"
         - "25827:25827/udp"
     volumes:
@@ -63,3 +63,9 @@ lb:
     environment:
         - BACKEND_PORT=8080
         - BALANCE=roundrobin
+web:
+    image: nginx:latest
+    ports:
+        - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
