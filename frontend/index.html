@@ -1,54 +1,54 @@
 ﻿<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-		<script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript" src="./assets/js/functions.js"></script>	
-		<script type="text/javascript" src="./assets/js/bootstrap.js"></script>
-		<title>Nefsfile transformer</title>
-		<link href="assets/css/bootstrap.css" rel="stylesheet" />
-	</head>
-	<body>
-		<div class="navbar navbar-default navbar-static-top">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Nefsfile transformer</a>	
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<section style="padding-bottom: 50px; padding-top: 50px;">
-				<div class="col-md-4">
-					<form class="form-horizontal">
-						<fieldset>
-							<div class="form-group">
-								<label for="select" class="control-label">Formato de origem</label>
-								<select class="form-control" id="arquivos_origem" >
-									<option>Selecione um formato</option>
-								</select>
-								<br>
-								<div id="div_formato_destino" style="display: none">
-									<label for="select" class="control-label">Formato de destino</label>
-									<select class="form-control" id="arquivos_destino">
-										<option>Selecione um formato</option>
-									</select>
-								</div>
-								<br>
-								<div id="botao_enviar_arquivo" style="display: none">
-									<a href="#" class="btn btn-primary" id="escolher_arquivo" >ENVIAR ARQUIVO</a>
-									<input type="file" name="files[]" id="upload" style="display:none" />	
-								</div>	
-								<br>
-								<div id="div_lista_arquivos" style="display: none">
-									<h3>Arquivos convertidos</h3>
-									<div class="list-group" id="lista_arquivos_convertidos">										
-									</div>		
-								</div>						
-							</div>
-						</fieldset>
-					</form>
-				</div>
-			</section>
-		</div>	
-	</body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="./assets/js/functions.js"></script> 
+  <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
+  <title>Nefsfile transformer</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Nefsfile transformer</a> 
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <section style="padding-bottom: 50px; padding-top: 50px;">
+      <div class="col-md-4">
+        <form class="form-horizontal">
+          <fieldset>
+            <div class="form-group">
+              <label for="select" class="control-label">Formato de origem</label>
+              <select class="form-control" id="arquivos_origem" >
+                <option>Selecione um formato</option>
+              </select>
+              <br>
+              <div id="div_formato_destino" style="display: none">
+                <label for="select" class="control-label">Formato de destino</label>
+                <select class="form-control" id="arquivos_destino">
+                  <option>Selecione um formato</option>
+                </select>
+              </div>
+              <br>
+              <div id="botao_enviar_arquivo" style="display: none">
+                <a href="#" class="btn btn-primary" id="escolher_arquivo" >ENVIAR ARQUIVO</a>
+                <input type="file" name="files[]" id="upload" style="display:none" /> 
+              </div>  
+              <br>
+              <div id="div_lista_arquivos" style="display: none">
+                <h3>Arquivos convertidos</h3>
+                <div class="list-group" id="lista_arquivos_convertidos">                    
+                </div>    
+              </div>            
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+  </div>  
+</body>
 </html>
