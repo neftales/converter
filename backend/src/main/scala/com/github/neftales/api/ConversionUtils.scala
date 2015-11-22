@@ -1,5 +1,6 @@
 package com.github.neftales.api
 
+import com.github.neftales.controllers.NodeFormatResponse
 import com.github.neftales.graph.{ConvertGraph, Dijkstra}
 
 object ConversionUtils {
@@ -32,7 +33,7 @@ object ConversionUtils {
 
   def getNodes()(implicit graph: ConvertGraph) = {
     graph.nodes map {
-      node => node.toString
+      node => NodeFormatResponse(node.toString)
     }
   }
 
