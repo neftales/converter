@@ -1,14 +1,12 @@
 converter:
-    build: backend
-    volumes:
-        - ./backend/target/scala-2.11:/usr/local
+    image: neftales/converter:0.1
     expose:
         - "8080"
     links:
         - logstash-agent:logs
 
 elasticsearch-central:
-    image: elasticsearch:latest
+    image: elasticsearch:1.3.8
     volumes:
         - ./docker-compose/elasticsearch/conf:/usr/share/elasticsearch/conf
         - ./docker-compose/elasticsearch/data:/usr/share/elasticsearch/data
@@ -32,7 +30,7 @@ redis-cache:
         - "6379:6379"
 
 logstash-agent:
-    image: logstash:latest
+    image: logstash:1.5.5-1
     ports:
         - "25827:25827"
         - "25827:25827/udp"
@@ -43,7 +41,7 @@ logstash-agent:
        - redis-cache:redis
 
 logstash-central:
-    image: logstash:latest
+    image: logstash:1.5.5-1
     ports:
         - "25826:25826"
         - "25826:25826/udp"
@@ -64,8 +62,7 @@ lb:
         - BACKEND_PORT=8080
         - BALANCE=roundrobin
 web:
-    image: nginx:latest
+    image: neftales/converter-web:0.1
     ports:
         - "80:80"
-    volumes:
-      - ./frontend:/usr/share/nginx/html:ro
+
