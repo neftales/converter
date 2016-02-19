@@ -6,13 +6,13 @@ converter:
         - logstash-agent:logs
 
 elasticsearch-central:
-    image: elasticsearch:1.3.8
+    image: elasticsearch:latest
     volumes:
         - ./docker-compose/elasticsearch/conf:/usr/share/elasticsearch/conf
         - ./docker-compose/elasticsearch/data:/usr/share/elasticsearch/data
     environment:
         - ES_CLUSTERNAME=mydevelastic
-    command: elasticsearch -Des.config=/usr/share/elasticsearch/conf/elasticsearch.yml
+    command: elasticsearch --path.config=/usr/share/elasticsearch/conf/
     ports:
         - "9200:9200"
         - "9300:9300"
@@ -30,7 +30,7 @@ redis-cache:
         - "6379:6379"
 
 logstash-agent:
-    image: logstash:1.5.5-1
+    image: logstash:latest
     ports:
         - "25827:25827"
         - "25827:25827/udp"
@@ -41,7 +41,7 @@ logstash-agent:
        - redis-cache:redis
 
 logstash-central:
-    image: logstash:1.5.5-1
+    image: logstash:latest
     ports:
         - "25826:25826"
         - "25826:25826/udp"
