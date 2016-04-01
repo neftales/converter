@@ -22,8 +22,9 @@
     <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <destination>${LOGS_PORT_25827_TCP_ADDR}:${LOGS_PORT_25827_TCP_PORT}</destination>
         <!-- encoder is required -->
-        <encoder>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <customFields>{"appname":"Converter","version":"Version 0.0.1-SNAPSHOT"}</customFields>
         </encoder>
     </appender>
 
