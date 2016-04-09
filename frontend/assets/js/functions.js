@@ -31,7 +31,7 @@ $(document).on('change', '#arquivos_origem', function(e) {
 
 //Chamado quando um novo arquivo é selecionado.
 $(document).on('change', '#upload', function(e) {
-  transformar_aqruivo_base64(e);
+  toBase64(e);
 });
 
 //Chamado quando o formato de destino é alterado.
@@ -80,7 +80,7 @@ function obter_arquivos_de_destino(formato) {
 }
 
 //Enviando arquivo para transformação.
-function obter_arquivo_transformado(content, nome_arquivo) {
+function obterArquivoConvertido(content, nome_arquivo) {
   var transacao = nova_transacao();
   transacao.start = $("#arquivos_origem").val();
   transacao.end = $("#arquivos_destino").val();
@@ -102,13 +102,13 @@ function obter_arquivo_transformado(content, nome_arquivo) {
   });
 }
 
-function transformar_aqruivo_base64(evt, nome_arquivo) {
+function toBase64(evt, nome_arquivo) {
   var file = evt.target.files[0];
   if (file) {
     var reader = new FileReader();
     reader.onload = function(readerEvt) {
       var binaryString = readerEvt.target.result;
-      obter_arquivo_transformado(btoa(binaryString), file.name);
+      obterArquivoConvertido(btoa(binaryString), file.name);
     };
     reader.readAsBinaryString(file);
   }
