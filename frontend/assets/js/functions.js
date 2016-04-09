@@ -26,6 +26,7 @@ $(document).ready(function() {
 $(document).on('change', '#arquivos_origem', function(e) {
   e.preventDefault();
   obter_arquivos_de_destino(this.value);
+  $("#upload").attr('accept', "." + this.value);
 });
 
 //Chamado quando um novo arquivo é selecionado.
