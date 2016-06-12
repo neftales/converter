@@ -34,6 +34,7 @@ class ConverterController extends BaseController with LazyLogging {
       case Some(function) =>
         logger.info(s"${data.start}")
         val converted = function(data.content.toSeq)
+        logger.info(s"Conversão de ${data.start} para ${data.end} realizada com sucesso.")
         Ok(ResponseConversion(s"${data.end}", Base64.encodeBytes(converted.toArray)))
       case None =>
         logger.info(s"Impossivel realizar a conversao de ${data.start} para ${data.end}")
