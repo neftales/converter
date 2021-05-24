@@ -8,6 +8,8 @@ class ScalatraBootstrap extends LifeCycle {
 
     context.mount(new ConverterController, "/converter", "converter")
 
+    context.setInitParameter("org.scalatra.environment", "production")
+
     context.setInitParameter(CorsSupport.AllowedOriginsKey, "*")
     context.setInitParameter(CorsSupport.AllowedMethodsKey, "GET,PUT,POST")
     context.setInitParameter(CorsSupport.AllowedHeadersKey, "Content-Type")
