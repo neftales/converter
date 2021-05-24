@@ -1,8 +1,10 @@
 import com.github.neftales.conversion.image.Image
-import com.github.neftales.graph.{ConvertGraph, Dijkstra, converteGraph}
-import org.scalatest._
+import com.github.neftales.graph.{ConvertGraph, Dijkstra}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.must.Matchers
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
-class DijkstraSpec extends FlatSpec with Matchers {
+class DijkstraSpec extends AnyFlatSpec with Matchers {
 
   val graph = new ConvertGraph
 

@@ -1,9 +1,10 @@
 package com.github.neftales.graph
 
-import org.scalatest.{Matchers, FlatSpec}
-import com.github.neftales.graph.converteGraph
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.must.Matchers
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
-class GraphSpec extends FlatSpec with Matchers {
+class GraphSpec extends AnyFlatSpec with Matchers {
 
   "Graph" should "return a Some(GIF)" in {
     converteGraph.getNode("GIF") match {

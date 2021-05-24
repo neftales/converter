@@ -42,7 +42,7 @@ lazy val converter = (project in file("."))
 
       // Test
       "org.scalatra" %% "scalatra-scalatest" % ScalatraVersion % "test",
-      "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+      "org.scalatest" %% "scalatest" % "3.2.9" % "test"
     ),
     libraryDependencies ~= { _.map(_.exclude("org.slf4j", "slf4j-simple")) }
   )
