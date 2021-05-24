@@ -13,7 +13,7 @@ val ScalatraVersion = "2.7.+"
 lazy val converter = (project in file("."))
   .settings(ScalatraPlugin.scalatraWithJRebel: _*)
   .settings(commonSettings: _*)
-  .settings(name := "convertAnyToOptionOfAny",
+  .settings(name := "converter-api",
     resolvers ++= Seq(
       "tpolecat" at "http://dl.bintray.com/tpolecat/maven",
       "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases"
