@@ -3,7 +3,7 @@ package com.github.neftales.controllers
 import com.github.neftales.applicationExecutor
 import com.typesafe.scalalogging.slf4j.LazyLogging
 import org.json4s.{DefaultFormats, Formats}
-import org.scalatra.json.JacksonJsonSupport
+import org.scalatra.json._
 import org.scalatra.{CorsSupport, FutureSupport, ScalatraServlet}
 import scala.concurrent.ExecutionContext
 import com.github.neftales.api.ConversionFormats
