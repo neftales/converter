@@ -3,11 +3,11 @@ import org.scalatra.sbt._
 lazy val commonSettings = Seq(
   organization := "br.com.neftales",
   version := "0.1.0",
-  scalaVersion := "2.11.7"
+  scalaVersion := "2.13.6"
 )
 
 val JettyVersion = "9.4.41.v20210516"
-val Json4sVersion = "3.5.2"
+val Json4sVersion = "3.6.6"
 val ScalatraVersion = "2.7.+"
 
 lazy val converter = (project in file("."))
@@ -29,8 +29,8 @@ lazy val converter = (project in file("."))
       "com.github.jai-imageio" % "jai-imageio-core" % "1.3.0",
 
       // Log
-      "ch.qos.logback" % "logback-classic" % "1.1.3",
-      "com.typesafe.scala-logging" % "scala-logging-slf4j_2.11" % "2.1.2",
+      "ch.qos.logback" % "logback-classic" % "1.2.3",
+      "com.typesafe.scala-logging" %% "scala-logging" % "3.9.3",
 
       // Scalatra
       "org.scalatra" %% "scalatra" % ScalatraVersion,
@@ -40,9 +40,8 @@ lazy val converter = (project in file("."))
       "org.json4s" %% "json4s-jackson" % Json4sVersion,
       "org.json4s" %% "json4s-ext" % Json4sVersion,
 
-      // Test
+        // Test
       "org.scalatra" %% "scalatra-scalatest" % ScalatraVersion % "test",
       "org.scalatest" %% "scalatest" % "3.2.9" % "test"
-    ),
-    libraryDependencies ~= { _.map(_.exclude("org.slf4j", "slf4j-simple")) }
+    )
   )

@@ -3,7 +3,7 @@
 $(document).ready(function() {
   jQuery.ajax({
     type: 'GET',
-    url: 'http://localhost:8888/converter/nodes',
+    url: 'http://localhost:8080/converter/nodes',
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     headers: {},
@@ -60,7 +60,7 @@ function nova_transacao() {
 function obter_arquivos_de_destino(formato) {
   jQuery.ajax({
     type: 'GET',
-    url: 'http://localhost:8888/converter/from/' + formato,
+    url: 'http://localhost:8080/converter/from/' + formato,
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     success: function(response) {
@@ -87,7 +87,7 @@ function obterArquivoConvertido(content, nome_arquivo) {
   transacao.content = content;
   jQuery.ajax({
     type: 'POST',
-    url: 'http://localhost:8888/converter',
+    url: 'http://localhost:8080/converter',
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: JSON.stringify(transacao),
