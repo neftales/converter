@@ -1,6 +1,7 @@
 package com.github.neftales.conversion.image
 
-import com.typesafe.scalalogging.slf4j.LazyLogging
+import com.typesafe.scalalogging.LazyLogging
+
 
 object Image extends LazyLogging {
 

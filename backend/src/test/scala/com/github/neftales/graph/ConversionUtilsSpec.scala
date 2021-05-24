@@ -1,11 +1,11 @@
 package com.github.neftales.graph
 
 import java.io.{File, FileInputStream}
-
 import com.github.neftales.api.ConversionUtils
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class ConversionUtilsSpec extends FlatSpec with Matchers {
+class ConversionUtilsSpec extends AnyFlatSpec with Matchers {
 
   val filePNG = new File(getClass.getClassLoader.getResource("docker.png").getPath)
 

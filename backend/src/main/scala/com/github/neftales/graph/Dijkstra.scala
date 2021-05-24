@@ -38,8 +38,8 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
     (distance, path)
   }
 
-  private def initDistance(nodes: List[Node]) = {
-    nodes.map(t => t -> Int.MaxValue)(collection.breakOut): Map[Node, Int]
+  private def initDistance(nodes: List[Node]): Map[Node, Int] = {
+    nodes.map(t => t -> Int.MaxValue).to(Map)
   }
 
   protected def extractMinimum[T](Q: Set[T], D: Map[T, Int]): T = {
@@ -81,7 +81,7 @@ class Dijkstra[G <: ConvertGraph](graph: G) {
   }
 
   def mountListOfEdge(stack: mutable.Stack[Node]): Option[List[Edge]] = {
-    val list = new mutable.MutableList[Edge]
+    val list = new mutable.ArrayDeque[Edge]
 
     while (stack.size > 1) {
       val node = stack.pop()

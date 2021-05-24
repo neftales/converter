@@ -1,10 +1,12 @@
 package com.github.neftales.conversion.image
 
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.must.Matchers
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
+
 import java.io.{File, FileInputStream}
 
-import org.scalatest.{FlatSpec, Matchers}
-
-class ImageSpec extends FlatSpec with Matchers {
+class ImageSpec extends AnyFlatSpec with Matchers {
 
   val fileBMP = new File(getClass.getClassLoader.getResource("docker.bmp").getPath)
   val fileJPEG = new File(getClass.getClassLoader.getResource("docker.jpg").getPath)

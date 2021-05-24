@@ -1,31 +1,34 @@
-import com.github.neftales.conversion.textplain.{TextPlainToHtml, TextPlainToPdf}
+import com.github.neftales.conversion.image.Image
 import com.github.neftales.graph.{ConvertGraph, Dijkstra}
-import org.scalatest._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.must.Matchers
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
-class DijkstraSpec extends FlatSpec with Matchers {
+class DijkstraSpec extends AnyFlatSpec with Matchers {
 
   val graph = new ConvertGraph
-  // Starting com.github.neftales.graph with some nodes
-  graph(List("TXT", "PDF", "HTML", "PNG", "FAX", "GIF"))
 
-  graph.connectWithWeightWithBehavior("TXT", List(("PDF", 2, TextPlainToPdf), ("HTML", 6, TextPlainToHtml), ("PNG", 7, TextPlainToPdf)))
-  graph.connectWithWeight("PDF", List(("FAX", 6), ("PNG", 3)))
-  graph.connectWithWeight("HTML", List(("FAX", 1)))
-  graph.connectWithWeight("PNG", List(("FAX", 5)))
+  graph(List("PNG", "TIFF", "GIF", "BMP", "JPEG", "SVG"))
+
+  graph.connectWithWeightWithBehavior("PNG", List(("TIFF", 5, Image.toTIFF), ("JPEG", 1, Image.toJPEG)))
+  graph.connectWithWeightWithBehavior("JPEG", List(("BMP", 5, Image.toBMP)))
+  graph.connectWithWeightWithBehavior("BMP", List(("GIF", 3, Image.toGIF)))
+  graph.connectWithWeightWithBehavior("GIF", List(("PNG", 1, Image.toPNG), ("JPEG", 3, Image.toJPEG)))
+
 
   val dijkstra = new Dijkstra[graph.type](graph)
-  val (dis, path) = dijkstra.compute("TXT").get
+  val (dis, path) = dijkstra.compute("GIF").get
 
   "Dijkstra" should "find shortest path" in {
-    dis("TXT") shouldBe 0
-    dis("HTML") shouldBe 6
-    dis("FAX") shouldBe 7
-    dis("PDF") shouldBe 2
-    dis("PNG") shouldBe 5
+    dis("PNG") shouldBe 1
+    dis("TIFF") shouldBe 6
+    dis("GIF") shouldBe 0
+    dis("BMP") shouldBe 7
+    dis("JPEG") shouldBe 2
   }
 
   "Dijkstra" should "not find shortest path" in {
-    dis("GIF") shouldBe Int.MaxValue
+    dis("SVG") shouldBe Int.MaxValue
   }
 
 }
