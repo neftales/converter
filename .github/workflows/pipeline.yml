@@ -1,4 +1,4 @@
-name: Converter
+name: CD
 on:
   push:
     branches: [ setup-actions ]
@@ -8,7 +8,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up JDK 8
+    - name: Set up Scala Environment
       uses: olafurpg/setup-scala@v10
     - name: Tests
       working-directory: ./backend
