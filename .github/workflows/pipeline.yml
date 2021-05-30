@@ -16,9 +16,6 @@ jobs:
     - name: Assembly app
       working-directory: ./backend
       run: sbt assembly
-    - name: Docker build and push
-      working-directory: ./backend
-      run: sbt assembly
     - name: Docker Build & Push Action
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
