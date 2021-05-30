@@ -20,6 +20,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
         dockerfile: ./backend/Dockerfile
+        buildArgs: TARGET_FOLDER=./backend/target
         image: neftales/converter-api
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
